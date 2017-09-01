@@ -35,10 +35,15 @@ class Dragable {
   mousedown = (event) => {
     event.stopPropagation();
 
+    const center = this.handler.getCenter();
+    const angle = Math.atan2(event.clientY - center.y, event.clientX - center.x);
+
     const dragStart = {
       x: event.clientX,
       y: event.clientY,
-      rect: this.parent.dom.getBoundingClientRect(),
+      rect: this.handler.getComputedLocation(),
+      center,
+      angle,
     };
 
     this.isActive = true;

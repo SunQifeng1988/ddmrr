@@ -25,21 +25,21 @@ class EditorPage extends Component {
         </head>
         <body>
           <div className="parent" style={ {
-            left: '500px',
-            top: '500px',
-            width: '200px',
-            height: '100px',
+            left: '100px',
+            top: '100px',
+            width: '400px',
+            height: '200px',
             border: '20px solid black' } }
           >
             <div className="child">
               <h1>Child Inside</h1>
             </div>
           </div>
-          <div className="parent">
+          {/* <div className="parent">
             <div className="child">
               <image src="/static/test.jpg"/>
             </div>
-          </div>
+          </div> */}
           <script id={ 'js_ddmrr' } src={ assets.ddmrr.js }/>
         </body>
       </html>
