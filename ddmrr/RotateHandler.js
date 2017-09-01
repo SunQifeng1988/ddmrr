@@ -15,18 +15,26 @@ class RotateHandler extends TransformHandler {
 
   onEnd = () => {
     // nothing to do here;
-    console.log('on rotate end'); // eslint-disable-line no-console
+    console.log('on rotating'); // eslint-disable-line no-console
   }
 
   onGoing = (event, dragOver) => {
     console.log('on rotating'); // eslint-disable-line no-console
-
     const om = this.originalMatrx;
-    const offsetX = dragOver.x - this.dragStart.x;
-    const offsetY = dragOver.y - this.dragStart.y;
+    const currentAngle = Math.atan2(dragOver.y - this.dragStart.center.y, dragOver.x - this.dragStart.center.x);
+    const da = currentAngle - this.dragStart.angle;
 
+    const c = Math.cos(da);
+    const s = Math.sin(da);
+
+    const rm = [c, s, -s, c];
+
+    const nm = this.matrixProduct_2d(om, rm);
+
+    this.opTarget.style.webkitTransform
+          = `matrix(${nm[0]},${nm[1]},${nm[2]},${nm[3]},${om[4]},${om[5]})`;
     this.opTarget.style.transform
-      = `matrix(${om[0]},${om[1]},${om[2]},${om[3]},${om[4] + offsetX},${om[5] + offsetY})`;
+          = `matrix(${nm[0]},${nm[1]},${nm[2]},${nm[3]},${om[4]},${om[5]})`;
   }
 }
 

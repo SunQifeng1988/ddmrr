@@ -8,10 +8,12 @@ class DDMRR {
     if (!dom.children) {
       console.log('dom have no child nodes');  // eslint-disable-line no-console
       this.initialized = false;
+      return;
     }
     if (dom.children.length > 1) {
       console.log('dom have more than one child node');  // eslint-disable-line no-console
       this.initialized = false;
+      return;
     }
 
     this.dom = dom;
@@ -64,16 +66,17 @@ class DDMRR {
   }
 
   relocateMove = () => {
-    const computedLocation = getComputedLocation(this.dom);
+    const computedLocation = this.getComputedBorderWidth();
     this.dragPanel.dom.style.left = `-${computedLocation.borderLeft}px`;
     this.dragPanel.dom.style.top = `-${computedLocation.borderTop}px`;
     this.dragPanel.dom.style.right = `-${computedLocation.borderRight}px`;
     this.dragPanel.dom.style.bottom = `-${computedLocation.borderBottom}px`;
+    this.dragPanel.dom.style.display = 'block';
   }
 
   /* eslint-disable no-param-reassign */
   relocateResize = () => {
-    const computedLocation = getComputedLocation(this.dom);
+    const computedLocation = this.getComputedBorderWidth();
     this.anchors.forEach((an) => {
       switch (an.dom.dataset.direction) {
         case 'se': {
@@ -122,14 +125,35 @@ class DDMRR {
         }
         default:
       }
+      an.dom.style.display = 'block';
     });
   }
   /* eslint-disable no-param-reassign */
 
   relocateRotate = () => {
-    const computedLocation = getComputedLocation(this.dom);
+    const computedLocation = this.getComputedBorderWidth();
     this.rotateAnchor.dom.style.top = `-${computedLocation.borderTop + 24}px`;
     this.rotateAnchor.dom.style.right = `-${computedLocation.borderRight + 24}px`;
+    this.rotateAnchor.dom.style.display = 'block';
+  }
+
+
+  getComputedBorderWidth = () => {
+    const style = getComputedStyle(this.dom);
+    return {
+      borderTop: parseFloat(style.borderTopWidth),
+      borderBottom: parseFloat(style.borderBottomWidth),
+      borderLeft: parseFloat(style.borderLeftWidth),
+      borderRight: parseFloat(style.borderRightWidth),
+    };
+  }
+
+  reset = () => {
+    this.dom.removeChild(this.dragPanel.dom);
+    this.dom.removeChild(this.rotateAnchor.dom);
+    this.anchors.forEach((anchor) => {
+      this.dom.removeChild(anchor.dom);
+    });
   }
 }
 

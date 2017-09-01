@@ -1,12 +1,14 @@
 .parent{
     position: absolute;
     box-sizing: border-box;
+    user-select: none;
 }
 
 .drag-panel{
     position: absolute;
     background: rgba(0,0,0,0.3);
     cursor: move;
+    display: none;
 }
 
 .resize-anchor {
@@ -19,6 +21,7 @@
     background-color: white;
     position: absolute;
     cursor: default;
+    display: none;
 }
 
 .rotate-anchor{
@@ -27,6 +30,7 @@
     width: 12px;
     height: 12px;
     border-radius: 12px;
+    display: none;
 }
 
 .rotate-anchor:hover{

@@ -72,10 +72,10 @@ var EditorPage = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'parent', style: {
-                left: '500px',
-                top: '500px',
-                width: '200px',
-                height: '100px',
+                left: '100px',
+                top: '100px',
+                width: '400px',
+                height: '200px',
                 border: '20px solid black' }
             },
             _react2.default.createElement(
@@ -86,15 +86,6 @@ var EditorPage = function (_Component) {
                 null,
                 'Child Inside'
               )
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'parent' },
-            _react2.default.createElement(
-              'div',
-              { className: 'child' },
-              _react2.default.createElement('image', { src: '/static/test.jpg' })
             )
           ),
           _react2.default.createElement('script', { id: 'js_ddmrr', src: _assets2.default.ddmrr.js })
