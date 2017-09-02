@@ -1,28 +1,25 @@
-import _ from 'lodash';
 import defaultConfig from './defaultConfig';
 import Dragable from './Dragable';
+import Emitter from './Emitter';
 import './DDMRR.scss';
 
 class DDMRR {
-  constructor(dom, config) {
-    if (!dom.children) {
-      console.log('dom have no child nodes');  // eslint-disable-line no-console
-      this.initialized = false;
-      return;
-    }
-    if (dom.children.length > 1) {
-      console.log('dom have more than one child node');  // eslint-disable-line no-console
-      this.initialized = false;
-      return;
-    }
-
+  constructor(dom, container, config) {
     this.dom = dom;
-    this.child = dom.children[0];
+    this.container = container;
 
-    const finalConfig = _.merge(defaultConfig, config);
-    this.initializeDoms(finalConfig);
-    this.relocateDom(finalConfig);
-    this.initialized = true;
+    Array.prototype.forEach.call(dom.querySelectorAll('.ddmrr-drag-drop'), (ddd) => {
+      ddd.parentNode.removeChild(ddd);
+    });
+
+    this.config = {
+      ...defaultConfig,
+      ...config,
+    };
+    this.initializeDoms(this.config);
+    this.relocateDom(this.config);
+
+    this.emitter = new Emitter();
   }
 
   initializeDoms = (config) => {
@@ -34,9 +31,15 @@ class DDMRR {
   initializeMove = (moveConfig) => {
     if (!moveConfig.enable) return;
     const panel = document.createElement('div');
-    panel.setAttribute('class', 'drag-panel');
+    panel.setAttribute('class', 'ddmrr-drag-drop drag-panel');
     this.dom.appendChild(panel);
     this.dragPanel = new Dragable(this, panel, moveConfig);
+
+    this.dragPanel.dom.addEventListener('dblclick', () => {
+      event.stopPropagation();
+
+      this.emitter.emit('dblclick', {});
+    });
   }
 
   initializeResize = (resizeConfig) => {
@@ -44,7 +47,7 @@ class DDMRR {
     this.anchors = [];
     resizeConfig.anchors.forEach((anchorName) => {
       const anchor = document.createElement('div');
-      anchor.setAttribute('class', 'resize-anchor');
+      anchor.setAttribute('class', 'ddmrr-drag-drop resize-anchor');
       anchor.dataset.direction = anchorName;
       this.dom.appendChild(anchor);
       this.anchors.push(new Dragable(this, anchor, resizeConfig));
@@ -54,15 +57,15 @@ class DDMRR {
   initializeRotate = (rotateConfig) => {
     if (!rotateConfig.enable) return;
     const anchor = document.createElement('div');
-    anchor.setAttribute('class', 'rotate-anchor');
+    anchor.setAttribute('class', 'ddmrr-drag-drop rotate-anchor');
     this.dom.appendChild(anchor);
     this.rotateAnchor = new Dragable(this, anchor, rotateConfig);
   }
 
   relocateDom = (config) => {
     config.move.enable && this.relocateMove(config.move);
-    config.move.enable && this.relocateResize(config.resize);
-    config.move.enable && this.relocateRotate();
+    config.resize.enable && this.relocateResize(config.resize);
+    config.rotate.enable && this.relocateRotate();
   }
 
   relocateMove = () => {
@@ -137,7 +140,6 @@ class DDMRR {
     this.rotateAnchor.dom.style.display = 'block';
   }
 
-
   getComputedBorderWidth = () => {
     const style = getComputedStyle(this.dom);
     return {
@@ -148,12 +150,23 @@ class DDMRR {
     };
   }
 
-  reset = () => {
-    this.dom.removeChild(this.dragPanel.dom);
-    this.dom.removeChild(this.rotateAnchor.dom);
-    this.anchors.forEach((anchor) => {
-      this.dom.removeChild(anchor.dom);
-    });
+  release = () => {
+    if (this.config.resize.enable) {
+      this.anchors.forEach((anchor) => {
+        anchor.unlinkEvents();
+        this.dom.removeChild(anchor.dom);
+      });
+    }
+
+    if (this.config.move.enable) {
+      this.dragPanel.unlinkEvents();
+      this.dom.removeChild(this.dragPanel.dom);
+    }
+
+    if (this.config.rotate.enable) {
+      this.rotateAnchor.unlinkEvents();
+      this.dom.removeChild(this.rotateAnchor.dom);
+    }
   }
 }
 

@@ -17,14 +17,17 @@ class EditorPage extends Component {
           <meta charSet="utf-8"/>
           <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
-          <title>reveal-editor.js</title>
+          <title>drag drop move resize rotate</title>
           {
             Object.keys(config.stylesheets).map(key => <link id={ `css_${key}` } rel="stylesheet" key={ key } href={ config.stylesheets[key] }/>)
           }
           <link id={ 'css_ddmrr' } rel="stylesheet" href={ assets.ddmrr.css }/>
         </head>
         <body>
-          <div className="parent" style={ {
+          <div className="target1" style={ {
+            position: 'absolute',
+            boxSizing: 'border-box',
+            userSelect: 'none',
             left: '100px',
             top: '100px',
             width: '400px',
@@ -32,14 +35,51 @@ class EditorPage extends Component {
             border: '20px solid black' } }
           >
             <div className="child">
-              <h1>Child Inside</h1>
+              <h1>Target1</h1>
             </div>
           </div>
-          {/* <div className="parent">
+          <div className="target2" style={ {
+            position: 'absolute',
+            boxSizing: 'border-box',
+            userSelect: 'none',
+            left: '100px',
+            top: '400px',
+            width: '400px',
+            height: '200px',
+            border: '20px solid black' } }
+          >
             <div className="child">
-              <image src="/static/test.jpg"/>
+              <h1>Target2</h1>
             </div>
-          </div> */}
+          </div>
+          <div className="target3" style={ {
+            position: 'absolute',
+            boxSizing: 'border-box',
+            userSelect: 'none',
+            left: '100px',
+            top: '700px',
+            width: '200px',
+            height: '200px',
+            border: '20px solid black' } }
+          >
+            <div className="child">
+              <h1>Target3</h1>
+            </div>
+          </div>
+          <div className="target4" style={ {
+            position: 'absolute',
+            boxSizing: 'border-box',
+            userSelect: 'none',
+            left: '400px',
+            top: '700px',
+            width: '200px',
+            height: '200px',
+            border: '20px solid black' } }
+          >
+            <div className="child">
+              <h1>Target4</h1>
+            </div>
+          </div>
           <script id={ 'js_ddmrr' } src={ assets.ddmrr.js }/>
         </body>
       </html>

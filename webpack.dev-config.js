@@ -8,12 +8,12 @@ const rules = require('./webpack/commonRules.js');
 
 const config = {
   entry: {
-    ddmrr: './ddmrr/index.js',
+    ddmrr: './ddmrr/test.js',
   },
   target: 'web',
   output: {
     filename: '[name].js',
-    publicPath: '//local.web:8080/assets/', // dev with nginx
+    publicPath: '//local.web:7070/assets/', // dev with nginx
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -35,10 +35,10 @@ const config = {
     rules,
   },
   devServer: {
-    port: 8080,
+    port: 7070,
     disableHostCheck: true,
     contentBase: path.resolve(__dirname, './build/public/assets'), // match the output path
-    publicPath: '//local.web:8080/assets/', // https://webpack.js.org/configuration/dev-server/#devserver-publicpath-
+    publicPath: '//local.web:7070/assets/', // https://webpack.js.org/configuration/dev-server/#devserver-publicpath-
     // or else resource like ttf will suffer cors
     headers: {
       'Access-Control-Allow-Origin': '*',

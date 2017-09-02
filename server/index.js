@@ -9,7 +9,7 @@ import EditorPage from './middlewares/EditorPage';
 const app = express();
 /* eslint-disable no-console */
 
-const PORT = process.env.PORT || 10000;
+const PORT = 7000;
 
 try {
   (async () => {

@@ -3,12 +3,22 @@ class TransformHandler {
     this.opTarget = opTarget;
   }
 
-  getBoundingClientRect = () => {
+  getBoundingClientRect = (dom) => {
+    if (dom) {
+      return dom.getBoundingClientRect();
+    }
     return this.opTarget.getBoundingClientRect();
   }
 
-  getComputedLocation = () => {
-    const style = getComputedStyle(this.opTarget);
+  getComputedLocation = (dom) => {
+    let style;
+
+    if (dom) {
+      style = getComputedStyle(dom);
+    } else {
+      style = getComputedStyle(this.opTarget);
+    }
+
     return {
       left: parseFloat(style.left),
       right: parseFloat(style.right),
@@ -20,8 +30,13 @@ class TransformHandler {
   };
 
 
-  getTransformMatrix = () => {
-    const style = getComputedStyle(this.opTarget);
+  getTransformMatrix = (dom) => {
+    let style;
+    if (dom) {
+      style = getComputedStyle(dom);
+    } else {
+      style = getComputedStyle(this.opTarget);
+    }
     const transform = style.transform || style.webkitTransform || style.mozTransform;
     let mat = transform.match(/^matrix3d\((.+)\)$/);
     if (mat) return parseFloat(mat[1].split(', ')[13]);
@@ -29,8 +44,13 @@ class TransformHandler {
     return mat ? mat[1].split(', ').map(n => parseFloat(n)) : [1, 0, 0, 1, 0, 0];
   }
 
-  getCenter = () => {
-    const location = this.getBoundingClientRect();
+  getCenter = (dom) => {
+    let location;
+    if (dom) {
+      location = this.getBoundingClientRect(dom);
+    } else {
+      location = this.getBoundingClientRect();
+    }
     return {
       x: location.left + (location.width / 2),
       y: location.top + (location.height / 2),

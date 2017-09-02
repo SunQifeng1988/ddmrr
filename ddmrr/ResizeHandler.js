@@ -9,20 +9,20 @@ class ResizeHandler extends TransformHandler {
 
   onStart = (event, dragStart) => {
     this.dragStart = dragStart;
-    this.transformMatrix = this.getTransformMatrix();
-    this.invariantPoint = this.getPoint();
+    this.dragStart.transformMatrix = this.getTransformMatrix();
+    this.dragStart.invariantPoint = this.getPoint();
   }
 
   onEnd = () => {
-    // nothing to do here;
+    this.draggable.parent.emitter.emit('resize_end', {});
   }
 
   onGoing = (event, dragOver) => {
     const offset = this.getOffset(dragOver);
     this.updateWidthAndHeight(offset);
 
-    const m = this.transformMatrix;
-    const os = this.invariantPoint;
+    const m = this.dragStart.transformMatrix;
+    const os = this.dragStart.invariantPoint;
     const cs = this.getPoint();
 
     const currentRect = this.getComputedLocation();
@@ -102,45 +102,83 @@ class ResizeHandler extends TransformHandler {
   }
 
   updateWidthAndHeight = (offset) => {
+    let dw = this.dragStart.rect.width;
+    let dh = this.dragStart.rect.height;
+
     switch (this.draggable.dom.dataset.direction) {
-      case 'se': {
-        this.opTarget.style.width = `${this.dragStart.rect.width + offset.x}px`;
-        this.opTarget.style.height = `${this.dragStart.rect.height + offset.y}px`;
-        break;
-      }
       case 's': {
-        this.opTarget.style.height = `${this.dragStart.rect.height + offset.y}px`;
+        dh = this.dragStart.rect.height + offset.y;
+        if (this.config.preserveAspectRatio) {
+          dw = Math.sign(dh) * Math.abs((dh * this.dragStart.rect.width) / this.dragStart.rect.height); // eslint-disable-line no-param-reassign
+        }
         break;
       }
       case 'e': {
-        this.opTarget.style.width = `${this.dragStart.rect.width + offset.x}px`;
-        break;
-      }
-      case 'nw': {
-        this.opTarget.style.width = `${this.dragStart.rect.width - offset.x}px`;
-        this.opTarget.style.height = `${this.dragStart.rect.height - offset.y}px`;
+        dw = this.dragStart.rect.width + offset.x;
+        if (this.config.preserveAspectRatio) {
+          dh = Math.sign(dw) * Math.abs((dw * this.dragStart.rect.height) / this.dragStart.rect.width); // eslint-disable-line no-param-reassign
+        }
         break;
       }
       case 'n': {
-        this.opTarget.style.height = `${this.dragStart.rect.height - offset.y}px`;
+        dh = this.dragStart.rect.height - offset.y;
+        if (this.config.preserveAspectRatio) {
+          dw = Math.sign(dh) * Math.abs((dh * this.dragStart.rect.width) / this.dragStart.rect.height); // eslint-disable-line no-param-reassign
+        }
         break;
       }
       case 'w': {
-        this.opTarget.style.width = `${this.dragStart.rect.width - offset.x}px`;
+        dw = this.dragStart.rect.width - offset.x;
+        if (this.config.preserveAspectRatio) {
+          dh = Math.sign(dw) * Math.abs((dw * this.dragStart.rect.height) / this.dragStart.rect.width); // eslint-disable-line no-param-reassign
+        }
         break;
       }
       case 'ne': {
-        this.opTarget.style.width = `${this.dragStart.rect.width + offset.x}px`;
-        this.opTarget.style.height = `${this.dragStart.rect.height - offset.y}px`;
+        dh = this.dragStart.rect.height - offset.y;
+
+        if (this.config.preserveAspectRatio) {
+          dw = Math.sign(dh) * Math.abs((dh * this.dragStart.rect.width) / this.dragStart.rect.height); // eslint-disable-line no-param-reassign
+        } else {
+          dw = this.dragStart.rect.width + offset.x;
+        }
+        break;
+      }
+      case 'se': {
+        dh = this.dragStart.rect.height + offset.y;
+
+        if (this.config.preserveAspectRatio) {
+          dw = Math.sign(dh) * Math.abs((dh * this.dragStart.rect.width) / this.dragStart.rect.height); // eslint-disable-line no-param-reassign
+        } else {
+          dw = this.dragStart.rect.width + offset.x;
+        }
+        break;
+      }
+      case 'nw': {
+        dh = this.dragStart.rect.height - offset.y;
+
+        if (this.config.preserveAspectRatio) {
+          dw = Math.sign(dh) * Math.abs((dh * this.dragStart.rect.width) / this.dragStart.rect.height); // eslint-disable-line no-param-reassign
+        } else {
+          dw = this.dragStart.rect.width - offset.x;
+        }
         break;
       }
       case 'sw': {
-        this.opTarget.style.width = `${this.dragStart.rect.width - offset.x}px`;
-        this.opTarget.style.height = `${this.dragStart.rect.height + offset.y}px`;
+        dh = this.dragStart.rect.height + offset.y;
+
+        if (this.config.preserveAspectRatio) {
+          dw = Math.sign(dh) * Math.abs((dh * this.dragStart.rect.width) / this.dragStart.rect.height); // eslint-disable-line no-param-reassign
+        } else {
+          dw = this.dragStart.rect.width - offset.x;
+        }
         break;
       }
       default:
     }
+
+    this.opTarget.style.width = `${dw}px`;
+    this.opTarget.style.height = `${dh}px`;
   }
 }
 

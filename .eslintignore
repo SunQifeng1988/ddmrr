@@ -1,6 +1,4 @@
 build/*
-semantic/*
-electron/build/*
 public/*
-reveal/*
 server_prod/*
+demo/*

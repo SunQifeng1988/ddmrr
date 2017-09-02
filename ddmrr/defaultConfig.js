@@ -6,6 +6,7 @@ export default {
   resize: {
     key: 'resize',
     enable: true,
+    preserveAspectRatio: false,
     anchors: ['n', 'e', 's', 'w', 'ne', 'se', 'nw', 'sw'],
   },
   rotate: {

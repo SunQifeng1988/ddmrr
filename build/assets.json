@@ -1,6 +1,5 @@
 {
   "ddmrr": {
-    "js": "//local.web:8080/assets/ddmrr.js",
-    "css": "//local.web:8080/assets/ddmrr.css"
+    "js": "//local.web:7070/assets/ddmrr.js"
   }
 }

@@ -8,19 +8,19 @@ class RotateHandler extends TransformHandler {
   }
 
   onStart = (event, dragStart) => {
-    console.log('on rotate start'); // eslint-disable-line no-console
     this.dragStart = dragStart;
-    this.originalMatrx = this.getTransformMatrix();
+
+    this.dragStart.originalMatrx = this.getTransformMatrix();
+    this.dragStart.center = this.getCenter();
+    this.dragStart.angle = Math.atan2(event.clientY - this.dragStart.center.y, event.clientX - this.dragStart.center.x);
   }
 
   onEnd = () => {
-    // nothing to do here;
-    console.log('on rotating'); // eslint-disable-line no-console
+    this.draggable.parent.emitter.emit('rotate_end', {});
   }
 
   onGoing = (event, dragOver) => {
-    console.log('on rotating'); // eslint-disable-line no-console
-    const om = this.originalMatrx;
+    const om = this.dragStart.originalMatrx;
     const currentAngle = Math.atan2(dragOver.y - this.dragStart.center.y, dragOver.x - this.dragStart.center.x);
     const da = currentAngle - this.dragStart.angle;
 
@@ -28,7 +28,6 @@ class RotateHandler extends TransformHandler {
     const s = Math.sin(da);
 
     const rm = [c, s, -s, c];
-
     const nm = this.matrixProduct_2d(om, rm);
 
     this.opTarget.style.webkitTransform

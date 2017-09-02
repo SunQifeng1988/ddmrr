@@ -59,7 +59,7 @@ var EditorPage = function (_Component) {
           _react2.default.createElement(
             'title',
             null,
-            'reveal-editor.js'
+            'drag drop move resize rotate'
           ),
           Object.keys(_config2.default.stylesheets).map(function (key) {
             return _react2.default.createElement('link', { id: 'css_' + key, rel: 'stylesheet', key: key, href: _config2.default.stylesheets[key] });
@@ -71,7 +71,10 @@ var EditorPage = function (_Component) {
           null,
           _react2.default.createElement(
             'div',
-            { className: 'parent', style: {
+            { className: 'target1', style: {
+                position: 'absolute',
+                boxSizing: 'border-box',
+                userSelect: 'none',
                 left: '100px',
                 top: '100px',
                 width: '400px',
@@ -84,7 +87,73 @@ var EditorPage = function (_Component) {
               _react2.default.createElement(
                 'h1',
                 null,
-                'Child Inside'
+                'Target1'
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'target2', style: {
+                position: 'absolute',
+                boxSizing: 'border-box',
+                userSelect: 'none',
+                left: '100px',
+                top: '400px',
+                width: '400px',
+                height: '200px',
+                border: '20px solid black' }
+            },
+            _react2.default.createElement(
+              'div',
+              { className: 'child' },
+              _react2.default.createElement(
+                'h1',
+                null,
+                'Target2'
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'target3', style: {
+                position: 'absolute',
+                boxSizing: 'border-box',
+                userSelect: 'none',
+                left: '100px',
+                top: '700px',
+                width: '200px',
+                height: '200px',
+                border: '20px solid black' }
+            },
+            _react2.default.createElement(
+              'div',
+              { className: 'child' },
+              _react2.default.createElement(
+                'h1',
+                null,
+                'Target3'
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'target4', style: {
+                position: 'absolute',
+                boxSizing: 'border-box',
+                userSelect: 'none',
+                left: '400px',
+                top: '700px',
+                width: '200px',
+                height: '200px',
+                border: '20px solid black' }
+            },
+            _react2.default.createElement(
+              'div',
+              { className: 'child' },
+              _react2.default.createElement(
+                'h1',
+                null,
+                'Target4'
               )
             )
           ),
