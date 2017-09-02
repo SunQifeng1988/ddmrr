@@ -55,6 +55,7 @@ var EditorPage = function (_Component) {
           'head',
           null,
           _react2.default.createElement('meta', { charSet: 'utf-8' }),
+          _react2.default.createElement('meta', { httpEquiv: 'X-UA-Compatible', content: 'IE=edge' }),
           _react2.default.createElement('meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' }),
           _react2.default.createElement(
             'title',
@@ -72,14 +73,10 @@ var EditorPage = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'target1', style: {
-                position: 'absolute',
-                boxSizing: 'border-box',
-                userSelect: 'none',
                 left: '100px',
                 top: '100px',
                 width: '400px',
-                height: '200px',
-                border: '20px solid black' }
+                height: '200px' }
             },
             _react2.default.createElement(
               'div',
@@ -94,14 +91,10 @@ var EditorPage = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'target2', style: {
-                position: 'absolute',
-                boxSizing: 'border-box',
-                userSelect: 'none',
                 left: '100px',
                 top: '400px',
                 width: '400px',
-                height: '200px',
-                border: '20px solid black' }
+                height: '200px' }
             },
             _react2.default.createElement(
               'div',
@@ -116,14 +109,10 @@ var EditorPage = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'target3', style: {
-                position: 'absolute',
-                boxSizing: 'border-box',
-                userSelect: 'none',
                 left: '100px',
                 top: '700px',
                 width: '200px',
-                height: '200px',
-                border: '20px solid black' }
+                height: '200px' }
             },
             _react2.default.createElement(
               'div',
@@ -138,14 +127,10 @@ var EditorPage = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'target4', style: {
-                position: 'absolute',
-                boxSizing: 'border-box',
-                userSelect: 'none',
                 left: '400px',
                 top: '700px',
                 width: '200px',
-                height: '200px',
-                border: '20px solid black' }
+                height: '200px' }
             },
             _react2.default.createElement(
               'div',

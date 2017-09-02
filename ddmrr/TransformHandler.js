@@ -3,12 +3,12 @@ class TransformHandler {
     this.opTarget = opTarget;
   }
 
-  getBoundingClientRect = (dom) => {
-    if (dom) {
-      return dom.getBoundingClientRect();
-    }
-    return this.opTarget.getBoundingClientRect();
-  }
+  // getBoundingClientRect = (dom) => {
+  //   if (dom) {
+  //     return dom.getBoundingClientRect();
+  //   }
+  //   return this.opTarget.getBoundingClientRect();
+  // }
 
   getComputedLocation = (dom) => {
     let style;
@@ -47,9 +47,9 @@ class TransformHandler {
   getCenter = (dom) => {
     let location;
     if (dom) {
-      location = this.getBoundingClientRect(dom);
+      location = this.getComputedLocation(dom);
     } else {
-      location = this.getBoundingClientRect();
+      location = this.getComputedLocation();
     }
     return {
       x: location.left + (location.width / 2),

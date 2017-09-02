@@ -109,28 +109,28 @@ class ResizeHandler extends TransformHandler {
       case 's': {
         dh = this.dragStart.rect.height + offset.y;
         if (this.config.preserveAspectRatio) {
-          dw = Math.sign(dh) * Math.abs((dh * this.dragStart.rect.width) / this.dragStart.rect.height); // eslint-disable-line no-param-reassign
+          dw = ((dh * this.dragStart.rect.width) / this.dragStart.rect.height); // eslint-disable-line no-param-reassign
         }
         break;
       }
       case 'e': {
         dw = this.dragStart.rect.width + offset.x;
         if (this.config.preserveAspectRatio) {
-          dh = Math.sign(dw) * Math.abs((dw * this.dragStart.rect.height) / this.dragStart.rect.width); // eslint-disable-line no-param-reassign
+          dh = ((dw * this.dragStart.rect.height) / this.dragStart.rect.width); // eslint-disable-line no-param-reassign
         }
         break;
       }
       case 'n': {
         dh = this.dragStart.rect.height - offset.y;
         if (this.config.preserveAspectRatio) {
-          dw = Math.sign(dh) * Math.abs((dh * this.dragStart.rect.width) / this.dragStart.rect.height); // eslint-disable-line no-param-reassign
+          dw = ((dh * this.dragStart.rect.width) / this.dragStart.rect.height); // eslint-disable-line no-param-reassign
         }
         break;
       }
       case 'w': {
         dw = this.dragStart.rect.width - offset.x;
         if (this.config.preserveAspectRatio) {
-          dh = Math.sign(dw) * Math.abs((dw * this.dragStart.rect.height) / this.dragStart.rect.width); // eslint-disable-line no-param-reassign
+          dh = ((dw * this.dragStart.rect.height) / this.dragStart.rect.width); // eslint-disable-line no-param-reassign
         }
         break;
       }
@@ -138,7 +138,7 @@ class ResizeHandler extends TransformHandler {
         dh = this.dragStart.rect.height - offset.y;
 
         if (this.config.preserveAspectRatio) {
-          dw = Math.sign(dh) * Math.abs((dh * this.dragStart.rect.width) / this.dragStart.rect.height); // eslint-disable-line no-param-reassign
+          dw = ((dh * this.dragStart.rect.width) / this.dragStart.rect.height); // eslint-disable-line no-param-reassign
         } else {
           dw = this.dragStart.rect.width + offset.x;
         }
@@ -148,7 +148,7 @@ class ResizeHandler extends TransformHandler {
         dh = this.dragStart.rect.height + offset.y;
 
         if (this.config.preserveAspectRatio) {
-          dw = Math.sign(dh) * Math.abs((dh * this.dragStart.rect.width) / this.dragStart.rect.height); // eslint-disable-line no-param-reassign
+          dw = ((dh * this.dragStart.rect.width) / this.dragStart.rect.height); // eslint-disable-line no-param-reassign
         } else {
           dw = this.dragStart.rect.width + offset.x;
         }
@@ -158,7 +158,7 @@ class ResizeHandler extends TransformHandler {
         dh = this.dragStart.rect.height - offset.y;
 
         if (this.config.preserveAspectRatio) {
-          dw = Math.sign(dh) * Math.abs((dh * this.dragStart.rect.width) / this.dragStart.rect.height); // eslint-disable-line no-param-reassign
+          dw = ((dh * this.dragStart.rect.width) / this.dragStart.rect.height); // eslint-disable-line no-param-reassign
         } else {
           dw = this.dragStart.rect.width - offset.x;
         }
@@ -168,7 +168,7 @@ class ResizeHandler extends TransformHandler {
         dh = this.dragStart.rect.height + offset.y;
 
         if (this.config.preserveAspectRatio) {
-          dw = Math.sign(dh) * Math.abs((dh * this.dragStart.rect.width) / this.dragStart.rect.height); // eslint-disable-line no-param-reassign
+          dw = ((dh * this.dragStart.rect.width) / this.dragStart.rect.height); // eslint-disable-line no-param-reassign
         } else {
           dw = this.dragStart.rect.width - offset.x;
         }

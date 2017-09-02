@@ -15,6 +15,7 @@ class EditorPage extends Component {
       <html className="no-js" lang="zh-CN">
         <head>
           <meta charSet="utf-8"/>
+          <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
           <title>drag drop move resize rotate</title>
@@ -25,56 +26,40 @@ class EditorPage extends Component {
         </head>
         <body>
           <div className="target1" style={ {
-            position: 'absolute',
-            boxSizing: 'border-box',
-            userSelect: 'none',
             left: '100px',
             top: '100px',
             width: '400px',
-            height: '200px',
-            border: '20px solid black' } }
+            height: '200px' } }
           >
             <div className="child">
               <h1>Target1</h1>
             </div>
           </div>
           <div className="target2" style={ {
-            position: 'absolute',
-            boxSizing: 'border-box',
-            userSelect: 'none',
             left: '100px',
             top: '400px',
             width: '400px',
-            height: '200px',
-            border: '20px solid black' } }
+            height: '200px' } }
           >
             <div className="child">
               <h1>Target2</h1>
             </div>
           </div>
           <div className="target3" style={ {
-            position: 'absolute',
-            boxSizing: 'border-box',
-            userSelect: 'none',
             left: '100px',
             top: '700px',
             width: '200px',
-            height: '200px',
-            border: '20px solid black' } }
+            height: '200px' } }
           >
             <div className="child">
               <h1>Target3</h1>
             </div>
           </div>
           <div className="target4" style={ {
-            position: 'absolute',
-            boxSizing: 'border-box',
-            userSelect: 'none',
             left: '400px',
             top: '700px',
             width: '200px',
-            height: '200px',
-            border: '20px solid black' } }
+            height: '200px' } }
           >
             <div className="child">
               <h1>Target4</h1>

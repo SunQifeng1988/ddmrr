@@ -1,7 +1,7 @@
 module.exports = {
   stylesheets: {
     normalize: '//cdn.bootcss.com/normalize/7.0.0/normalize.min.css',
-    // style: './static/style.css',
+    style: './static/style.css',
   },
   scripts: {
     // head: './static/lib/js/head.min.js',
