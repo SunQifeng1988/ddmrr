@@ -2,3 +2,6 @@ build/*
 public/*
 server_prod/*
 demo/*
+docs/*
+
+_config.yml
