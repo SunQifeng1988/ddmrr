@@ -12,7 +12,7 @@ const config = {
   target: 'web',
   output: {
     filename: '[name].js',
-    publicPath: '//local.web:7070/assets/', // dev with nginx
+    publicPath: '//local.web:7070/assets/',
   },
   plugins: [
     new webpack.DefinePlugin({
