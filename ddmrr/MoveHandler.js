@@ -2,8 +2,7 @@ import TransformHandler from './TransformHandler';
 
 class MoveHandler extends TransformHandler {
   constructor(draggable, config) {
-    super(draggable.parent.dom);
-    this.draggable = draggable;
+    super(draggable);
     this.config = config;
   }
 
@@ -19,6 +18,8 @@ class MoveHandler extends TransformHandler {
     } else {
       this.dragStart.originalMatrx = this.getTransformMatrix();
     }
+
+    this.draggable.parent.emitter.emit('move_start', {});
   }
 
   onEnd = () => {
@@ -48,6 +49,8 @@ class MoveHandler extends TransformHandler {
       this.opTarget.style.transform
         = `matrix(${om[0]},${om[1]},${om[2]},${om[3]},${om[4] + offsetX},${om[5] + offsetY})`;
     }
+
+    this.draggable.parent.emitter.emit('move_going', {});
   }
 }
 

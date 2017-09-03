@@ -1,5 +1,5 @@
 import defaultConfig from './defaultConfig';
-import Dragable from './Dragable';
+import Draggable from './Draggable';
 import Emitter from './Emitter';
 import applyStyleUtil from './applyStyleUtil';
 import styles from './styles';
@@ -39,7 +39,7 @@ class DDMRR {
       border: this.config.panelBorder,
     });
     this.dom.appendChild(panel);
-    this.dragPanel = new Dragable(this, panel, moveConfig);
+    this.dragPanel = new Draggable(this, panel, moveConfig);
 
     this.dragPanel.dom.addEventListener('dblclick', () => {
       event.stopPropagation();
@@ -63,7 +63,7 @@ class DDMRR {
       });
 
       this.dom.appendChild(anchor);
-      this.anchors.push(new Dragable(this, anchor, resizeConfig));
+      this.anchors.push(new Draggable(this, anchor, resizeConfig));
     });
   }
 
@@ -79,7 +79,7 @@ class DDMRR {
     });
 
     this.dom.appendChild(anchor);
-    this.rotateAnchor = new Dragable(this, anchor, rotateConfig);
+    this.rotateAnchor = new Draggable(this, anchor, rotateConfig);
   }
 
   relocateDom = (config) => {

@@ -1,18 +1,18 @@
 class TransformHandler {
-  constructor(opTarget) {
-    this.opTarget = opTarget;
+  constructor(draggable) {
+    this.draggable = draggable;
+    this.opTarget = draggable.parent.dom;
+    this.container = draggable.parent.container;
   }
 
   getComputedLocation = (dom) => {
     const domToBeComputed = dom || this.opTarget;
 
-    const style = getComputedStyle(domToBeComputed);
-
     const location = {
-      left: parseFloat(style.left),
-      width: parseFloat(domToBeComputed.offsetWidth),
-      height: parseFloat(domToBeComputed.offsetHeight),
-      top: parseFloat(style.top),
+      left: domToBeComputed.offsetLeft,
+      top: domToBeComputed.offsetTop,
+      width: domToBeComputed.offsetWidth,
+      height: domToBeComputed.offsetHeight,
     };
     return location;
   };
@@ -30,15 +30,12 @@ class TransformHandler {
     return mat ? mat[1].split(', ').map(n => parseFloat(n)) : [1, 0, 0, 1, 0, 0];
   }
 
-  getCenter = (dom) => {
+  getCenter(dom) {
     const domToBeComputed = dom || this.opTarget;
-
-    const location = this.getComputedLocation(domToBeComputed);
-    const matrix = this.getTransformMatrix(domToBeComputed);
-
+    const location = domToBeComputed.getBoundingClientRect();
     return {
-      x: location.left + (location.width / 2) + matrix[4],
-      y: location.top + (location.height / 2) + matrix[5],
+      x: location.left + (location.width / 2),
+      y: location.top + (location.height / 2),
     };
   }
 

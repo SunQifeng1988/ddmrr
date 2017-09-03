@@ -2,8 +2,7 @@ import TransformHandler from './TransformHandler';
 
 class ResizeHandler extends TransformHandler {
   constructor(draggable, config) {
-    super(draggable.parent.dom);
-    this.draggable = draggable;
+    super(draggable);
     this.config = config;
   }
 
@@ -11,6 +10,8 @@ class ResizeHandler extends TransformHandler {
     this.dragStart = dragStart;
     this.dragStart.transformMatrix = this.getTransformMatrix();
     this.dragStart.invariantPoint = this.getPoint();
+
+    this.draggable.parent.emitter.emit('resize_start', {});
   }
 
   onEnd = () => {
@@ -40,6 +41,8 @@ class ResizeHandler extends TransformHandler {
     //   = `matrix(${m[0]},${m[1]},${m[2]},${m[3]},${m[4] - dx},${m[5] - dy})`;
     this.opTarget.style.transform
       = `matrix(${m[0]},${m[1]},${m[2]},${m[3]},${m[4] - dx},${m[5] - dy})`;
+
+    this.draggable.parent.emitter.emit('resize_going', {});
   }
 
   getPoint = () => {

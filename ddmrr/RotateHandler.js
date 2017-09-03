@@ -2,8 +2,7 @@ import TransformHandler from './TransformHandler';
 
 class RotateHandler extends TransformHandler {
   constructor(draggable, config) {
-    super(draggable.parent.dom);
-    this.draggable = draggable;
+    super(draggable);
     this.config = config;
   }
 
@@ -13,6 +12,8 @@ class RotateHandler extends TransformHandler {
     this.dragStart.originalMatrx = this.getTransformMatrix();
     this.dragStart.center = this.getCenter();
     this.dragStart.angle = Math.atan2(event.clientY - this.dragStart.center.y, event.clientX - this.dragStart.center.x);
+
+    this.draggable.parent.emitter.emit('rotate_start', {});
   }
 
   onEnd = () => {
@@ -34,6 +35,8 @@ class RotateHandler extends TransformHandler {
     //       = `matrix(${nm[0]},${nm[1]},${nm[2]},${nm[3]},${om[4]},${om[5]})`;
     this.opTarget.style.transform
           = `matrix(${nm[0]},${nm[1]},${nm[2]},${nm[3]},${om[4]},${om[5]})`;
+
+    this.draggable.parent.emitter.emit('rotate_going', {});
   }
 }
 

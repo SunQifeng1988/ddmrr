@@ -2,7 +2,7 @@ import MoveHandler from './MoveHandler';
 import ResizeHandler from './ResizeHandler';
 import RotateHandler from './RotateHandler';
 
-class Dragable {
+class Draggable {
   constructor(parent, dom, config) {
     this.config = config;
     this.parent = parent;
@@ -101,4 +101,4 @@ class Dragable {
   }
 }
 
-export default Dragable;
+export default Draggable;
