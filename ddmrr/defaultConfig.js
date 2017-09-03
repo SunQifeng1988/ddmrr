@@ -1,4 +1,8 @@
 export default {
+  anchorBorder: '1px solid rgb(25, 172, 225)',
+  anchorBackgroundColor: 'white',
+  panelBorder: '1px solid rgb(25, 172, 225)',
+  panelBackgroundColor: 'rgba(0,0,0,0.2)',
   move: {
     key: 'move',
     enable: true,

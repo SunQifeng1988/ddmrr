@@ -3,41 +3,27 @@ class TransformHandler {
     this.opTarget = opTarget;
   }
 
-  // getBoundingClientRect = (dom) => {
-  //   if (dom) {
-  //     return dom.getBoundingClientRect();
-  //   }
-  //   return this.opTarget.getBoundingClientRect();
-  // }
-
   getComputedLocation = (dom) => {
-    let style;
+    const domToBeComputed = dom || this.opTarget;
 
-    if (dom) {
-      style = getComputedStyle(dom);
-    } else {
-      style = getComputedStyle(this.opTarget);
-    }
+    const style = getComputedStyle(domToBeComputed);
 
-    return {
+    const location = {
       left: parseFloat(style.left),
-      right: parseFloat(style.right),
-      width: parseFloat(style.width),
-      height: parseFloat(style.height),
+      width: parseFloat(domToBeComputed.offsetWidth),
+      height: parseFloat(domToBeComputed.offsetHeight),
       top: parseFloat(style.top),
-      bottom: parseFloat(style.bottom),
     };
+    return location;
   };
 
 
   getTransformMatrix = (dom) => {
-    let style;
-    if (dom) {
-      style = getComputedStyle(dom);
-    } else {
-      style = getComputedStyle(this.opTarget);
-    }
-    const transform = style.transform || style.webkitTransform || style.mozTransform;
+    const domToBeComputed = dom || this.opTarget;
+
+    const style = getComputedStyle(domToBeComputed);
+
+    const transform = style.transform || style.webkitTransform || style.mozTransform || style.msTransform;
     let mat = transform.match(/^matrix3d\((.+)\)$/);
     if (mat) return parseFloat(mat[1].split(', ')[13]);
     mat = transform.match(/^matrix\((.+)\)$/);
@@ -45,15 +31,14 @@ class TransformHandler {
   }
 
   getCenter = (dom) => {
-    let location;
-    if (dom) {
-      location = this.getComputedLocation(dom);
-    } else {
-      location = this.getComputedLocation();
-    }
+    const domToBeComputed = dom || this.opTarget;
+
+    const location = this.getComputedLocation(domToBeComputed);
+    const matrix = this.getTransformMatrix(domToBeComputed);
+
     return {
-      x: location.left + (location.width / 2),
-      y: location.top + (location.height / 2),
+      x: location.left + (location.width / 2) + matrix[4],
+      y: location.top + (location.height / 2) + matrix[5],
     };
   }
 

@@ -6,13 +6,14 @@ const rules = require('./webpack/commonRules.js');
 
 const config = {
   entry: {
-    demo: './ddmrr/demo.js',
+    index: './ddmrr/index.js',
   },
   target: 'web',
   output: {
     filename: '[name].js',
     path: path.join(__dirname, './build/assets/'),
     publicPath: './static/assets/',
+    libraryTarget: 'umd',
   },
   plugins: [
     new webpack.DefinePlugin({

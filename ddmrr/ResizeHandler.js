@@ -36,15 +36,15 @@ class ResizeHandler extends TransformHandler {
     const dx = (otx - ctx) + vx;
     const dy = (oty - cty) + vy;
 
-    this.opTarget.style.webkitTransform
-      = `matrix(${m[0]},${m[1]},${m[2]},${m[3]},${m[4] - dx},${m[5] - dy})`;
+    // this.opTarget.style.webkitTransform
+    //   = `matrix(${m[0]},${m[1]},${m[2]},${m[3]},${m[4] - dx},${m[5] - dy})`;
     this.opTarget.style.transform
       = `matrix(${m[0]},${m[1]},${m[2]},${m[3]},${m[4] - dx},${m[5] - dy})`;
   }
 
   getPoint = () => {
     const os = this.getComputedLocation();
-    switch (this.draggable.dom.dataset.direction) {
+    switch (this.draggable.dom.getAttribute('data-direction')) {
       case 'w': {
         const x = -os.width / 2;
         const y = 0;
@@ -105,7 +105,7 @@ class ResizeHandler extends TransformHandler {
     let dw = this.dragStart.rect.width;
     let dh = this.dragStart.rect.height;
 
-    switch (this.draggable.dom.dataset.direction) {
+    switch (this.draggable.dom.getAttribute('data-direction')) {
       case 's': {
         dh = this.dragStart.rect.height + offset.y;
         if (this.config.preserveAspectRatio) {

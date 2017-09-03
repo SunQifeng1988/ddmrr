@@ -2,7 +2,6 @@ import 'babel-polyfill';
 
 import express from 'express';
 import path from 'path';
-import compression from 'compression';
 
 import EditorPage from './middlewares/EditorPage';
 
@@ -13,7 +12,6 @@ const PORT = 7000;
 
 try {
   (async () => {
-    app.use(compression());
     app.use('/static/', express.static(path.join(__dirname, '../build/')));
     app.use('/static/', express.static(path.join(__dirname, '../public/')));
     app.get('/', EditorPage);
