@@ -22,50 +22,53 @@ class EditorPage extends Component {
           {
             Object.keys(config.stylesheets).map(key => <link id={ `css_${key}` } rel="stylesheet" key={ key } href={ config.stylesheets[key] }/>)
           }
-          <link id={ 'css_ddmrr' } rel="stylesheet" href={ assets.ddmrr.css }/>
         </head>
         <body>
           <div className="target1" style={ {
             left: '100px',
             top: '100px',
-            width: '400px',
+            width: '200px',
             height: '200px' } }
           >
             <div className="child">
               <h1>Target1</h1>
+              <p>normal</p>
             </div>
           </div>
           <div className="target2" style={ {
-            left: '100px',
-            top: '400px',
-            width: '400px',
+            left: '350px',
+            top: '100px',
+            width: '200px',
             height: '200px' } }
           >
             <div className="child">
               <h1>Target2</h1>
+              <p>ratio</p>
             </div>
           </div>
           <div className="target3" style={ {
             left: '100px',
-            top: '700px',
+            top: '350px',
             width: '200px',
             height: '200px' } }
           >
             <div className="child">
               <h1>Target3</h1>
+              <p>sync</p>
             </div>
           </div>
           <div className="target4" style={ {
-            left: '400px',
-            top: '700px',
+            left: '350px',
+            top: '350px',
             width: '200px',
             height: '200px' } }
           >
             <div className="child">
               <h1>Target4</h1>
+              <p>normal</p>
             </div>
           </div>
-          <script id={ 'js_ddmrr' } src={ assets.ddmrr.js }/>
+          <script id={ 'js_demo' } src={ assets.demo.js }/>
         </body>
       </html>
     );

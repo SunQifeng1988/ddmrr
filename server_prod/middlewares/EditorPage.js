@@ -64,8 +64,7 @@ var EditorPage = function (_Component) {
           ),
           Object.keys(_config2.default.stylesheets).map(function (key) {
             return _react2.default.createElement('link', { id: 'css_' + key, rel: 'stylesheet', key: key, href: _config2.default.stylesheets[key] });
-          }),
-          _react2.default.createElement('link', { id: 'css_ddmrr', rel: 'stylesheet', href: _assets2.default.ddmrr.css })
+          })
         ),
         _react2.default.createElement(
           'body',
@@ -75,7 +74,7 @@ var EditorPage = function (_Component) {
             { className: 'target1', style: {
                 left: '100px',
                 top: '100px',
-                width: '400px',
+                width: '200px',
                 height: '200px' }
             },
             _react2.default.createElement(
@@ -85,15 +84,20 @@ var EditorPage = function (_Component) {
                 'h1',
                 null,
                 'Target1'
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                'normal'
               )
             )
           ),
           _react2.default.createElement(
             'div',
             { className: 'target2', style: {
-                left: '100px',
-                top: '400px',
-                width: '400px',
+                left: '350px',
+                top: '100px',
+                width: '200px',
                 height: '200px' }
             },
             _react2.default.createElement(
@@ -103,6 +107,11 @@ var EditorPage = function (_Component) {
                 'h1',
                 null,
                 'Target2'
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                'ratio'
               )
             )
           ),
@@ -110,7 +119,7 @@ var EditorPage = function (_Component) {
             'div',
             { className: 'target3', style: {
                 left: '100px',
-                top: '700px',
+                top: '350px',
                 width: '200px',
                 height: '200px' }
             },
@@ -121,14 +130,19 @@ var EditorPage = function (_Component) {
                 'h1',
                 null,
                 'Target3'
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                'sync'
               )
             )
           ),
           _react2.default.createElement(
             'div',
             { className: 'target4', style: {
-                left: '400px',
-                top: '700px',
+                left: '350px',
+                top: '350px',
                 width: '200px',
                 height: '200px' }
             },
@@ -139,10 +153,15 @@ var EditorPage = function (_Component) {
                 'h1',
                 null,
                 'Target4'
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                'normal'
               )
             )
           ),
-          _react2.default.createElement('script', { id: 'js_ddmrr', src: _assets2.default.ddmrr.js })
+          _react2.default.createElement('script', { id: 'js_demo', src: _assets2.default.demo.js })
         )
       );
     }, _temp), _possibleConstructorReturn(_this, _ret);

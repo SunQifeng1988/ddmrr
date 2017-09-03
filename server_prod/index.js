@@ -10,10 +10,6 @@ var _path = require('path');
 
 var _path2 = _interopRequireDefault(_path);
 
-var _compression = require('compression');
-
-var _compression2 = _interopRequireDefault(_compression);
-
 var _EditorPage = require('./middlewares/EditorPage');
 
 var _EditorPage2 = _interopRequireDefault(_EditorPage);
@@ -33,7 +29,6 @@ try {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            app.use((0, _compression2.default)());
             app.use('/static/', _express2.default.static(_path2.default.join(__dirname, '../build/')));
             app.use('/static/', _express2.default.static(_path2.default.join(__dirname, '../public/')));
             app.get('/', _EditorPage2.default);
@@ -45,7 +40,7 @@ try {
               }
             });
 
-          case 5:
+          case 4:
           case 'end':
             return _context.stop();
         }

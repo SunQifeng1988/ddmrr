@@ -1,7 +1,8 @@
 import defaultConfig from './defaultConfig';
 import Dragable from './Dragable';
 import Emitter from './Emitter';
-import './DDMRR.scss';
+import applyStyleUtil from './applyStyleUtil';
+import styles from './styles';
 
 class DDMRR {
   constructor(dom, container, config) {
@@ -32,6 +33,11 @@ class DDMRR {
     if (!moveConfig.enable) return;
     const panel = document.createElement('div');
     panel.setAttribute('class', 'ddmrr-drag-drop drag-panel');
+    applyStyleUtil(panel, {
+      ...styles.dragPanel,
+      backgroundColor: this.config.panelBackgroundColor,
+      border: this.config.panelBorder,
+    });
     this.dom.appendChild(panel);
     this.dragPanel = new Dragable(this, panel, moveConfig);
 
@@ -48,7 +54,14 @@ class DDMRR {
     resizeConfig.anchors.forEach((anchorName) => {
       const anchor = document.createElement('div');
       anchor.setAttribute('class', 'ddmrr-drag-drop resize-anchor');
-      anchor.dataset.direction = anchorName;
+      anchor.setAttribute('data-direction', anchorName);
+
+      applyStyleUtil(anchor, {
+        ...styles.resizeAnchor,
+        backgroundColor: this.config.anchorBackgroundColor,
+        border: this.config.anchorBorder,
+      });
+
       this.dom.appendChild(anchor);
       this.anchors.push(new Dragable(this, anchor, resizeConfig));
     });
@@ -58,6 +71,13 @@ class DDMRR {
     if (!rotateConfig.enable) return;
     const anchor = document.createElement('div');
     anchor.setAttribute('class', 'ddmrr-drag-drop rotate-anchor');
+
+    applyStyleUtil(anchor, {
+      ...styles.rotateAnchor,
+      backgroundColor: this.config.anchorBackgroundColor,
+      border: this.config.anchorBorder,
+    });
+
     this.dom.appendChild(anchor);
     this.rotateAnchor = new Dragable(this, anchor, rotateConfig);
   }
@@ -81,7 +101,7 @@ class DDMRR {
   relocateResize = () => {
     const computedLocation = this.getComputedBorderWidth();
     this.anchors.forEach((an) => {
-      switch (an.dom.dataset.direction) {
+      switch (an.dom.getAttribute('data-direction')) {
         case 'se': {
           an.dom.style.bottom = `-${computedLocation.borderBottom + 6}px`;
           an.dom.style.right = `-${computedLocation.borderRight + 6}px`;

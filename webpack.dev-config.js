@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const AssetsPlugin = require('assets-webpack-plugin');
 
@@ -8,7 +7,7 @@ const rules = require('./webpack/commonRules.js');
 
 const config = {
   entry: {
-    ddmrr: './ddmrr/test.js',
+    demo: './ddmrr/demo.js',
   },
   target: 'web',
   output: {
@@ -25,9 +24,6 @@ const config = {
       path: path.resolve(__dirname, './build'),
       filename: 'assets.json',
       prettyPrint: true,
-    }),
-    new ExtractTextPlugin({
-      filename: '[name].css',
     }),
     new webpack.SourceMapDevToolPlugin(),
   ],
