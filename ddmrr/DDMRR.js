@@ -17,16 +17,16 @@ class DDMRR {
       ...defaultConfig,
       ...config,
     };
-    this.initializeDoms(this.config);
-    this.relocateDom(this.config);
+    this.initializeDoms();
+    this.relocateDom();
 
     this.emitter = new Emitter();
   }
 
-  initializeDoms = (config) => {
-    this.initializeMove(config.move);
-    this.initializeResize(config.resize);
-    this.initializeRotate(config.rotate);
+  initializeDoms = () => {
+    this.initializeMove(this.config.move);
+    this.initializeResize(this.config.resize);
+    this.initializeRotate(this.config.rotate);
   }
 
   initializeMove = (moveConfig) => {
@@ -82,10 +82,10 @@ class DDMRR {
     this.rotateAnchor = new Draggable(this, anchor, rotateConfig);
   }
 
-  relocateDom = (config) => {
-    config.move.enable && this.relocateMove(config.move);
-    config.resize.enable && this.relocateResize(config.resize);
-    config.rotate.enable && this.relocateRotate();
+  relocateDom = () => {
+    this.config.move.enable && this.relocateMove();
+    this.config.resize.enable && this.relocateResize();
+    this.config.rotate.enable && this.relocateRotate();
   }
 
   relocateMove = () => {

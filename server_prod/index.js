@@ -24,7 +24,7 @@ var app = (0, _express2.default)();
 var PORT = 7000;
 
 try {
-  _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+  _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {

@@ -180,8 +180,8 @@ class ResizeHandler extends TransformHandler {
       default:
     }
 
-    this.opTarget.style.width = `${dw}px`;
-    this.opTarget.style.height = `${dh}px`;
+    this.opTarget.style.width = `${Math.round(dw)}px`;
+    this.opTarget.style.height = `${Math.round(dh)}px`;
   }
 }
 

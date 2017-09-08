@@ -31,9 +31,9 @@ class RotateHandler extends TransformHandler {
     const rm = [c, s, -s, c];
     const nm = this.matrixProduct_2d(om, rm);
 
-    // this.opTarget.style.webkitTransform
-    //       = `matrix(${nm[0]},${nm[1]},${nm[2]},${nm[3]},${om[4]},${om[5]})`;
     this.opTarget.style.transform
+          = `matrix(${nm[0]},${nm[1]},${nm[2]},${nm[3]},${om[4]},${om[5]})`;
+    this.opTarget.style.webkitTransform
           = `matrix(${nm[0]},${nm[1]},${nm[2]},${nm[3]},${om[4]},${om[5]})`;
 
     this.draggable.parent.emitter.emit('rotate_going', {});
