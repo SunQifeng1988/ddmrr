@@ -41,10 +41,9 @@ class DDMRR {
     this.dom.appendChild(panel);
     this.dragPanel = new Draggable(this, panel, moveConfig);
 
-    this.dragPanel.dom.addEventListener('dblclick', () => {
+    this.dragPanel.dom.addEventListener('dblclick', (event) => {
       event.stopPropagation();
-
-      this.emitter.emit('dblclick', {});
+      this.emitter.emit('dblclick', event);
     });
   }
 
